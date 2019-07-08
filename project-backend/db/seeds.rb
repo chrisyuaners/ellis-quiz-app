@@ -5,11 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.delete_all
+Session.delete_all
+Card.delete_all
+Choice.delete_all
+SessionCard.delete_all
+CardChoice.delete_all
+
 u1 = User.create(name: "Emi")
 u2 = User.create(name: "Chris")
 
-s1 = Session.create(user_id: u1.id, right: 4, wrong: 1)
-s2 = Session.create(user_id: u2.id, right: 3, wrong: 2)
+s1 = Session.create(user_id: u1.id, right: 0, wrong: 0)
+s2 = Session.create(user_id: u2.id, right: 0, wrong: 0)
 
 c1 = Card.create(question: "What is the political party of the President now?", answer: "Republican", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
 c2 = Card.create(question: "We elect a President for how many years?", answer: "4", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")

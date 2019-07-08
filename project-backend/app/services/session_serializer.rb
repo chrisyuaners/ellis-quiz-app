@@ -5,6 +5,7 @@ class SessionSerializer
 
   def to_serialized_json
     @session.to_json(include: {
+      user: {only: [:name]},
       cards: {include: [:choices], except: [:created_at, :updated_at]}
       }, :except => [:created_at, :updated_at])
   end
