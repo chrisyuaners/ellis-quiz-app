@@ -1,9 +1,21 @@
 const MAIN_URL = "http://localhost:3000"
 const SESSIONS = "/sessions"
 const USERS = "/users"
+const CARDS = "/cards"
+const SESSIONCARDS = "/session_cards"
 const cardContainer = document.querySelector('#card-container')
 const statsContainer = document.querySelector('#stats-container')
 const login = document.querySelector('#login')
+const cardsArray = []
+
+function loadCards() {
+  fetch(`${MAIN_URL}${CARDS}`)
+  .then(resp => resp.json())
+  .then(json => json.forEach(card => cardsArray.push(card)))
+}
+
+addEventListenersToPage()
+loadCards()
 
 function getCards(json) {
   fetch(`${MAIN_URL}${SESSIONS}/${json.id}`)
@@ -12,7 +24,6 @@ function getCards(json) {
     renderCards(json.cards, json.id)
     slapStatsOnTheDom(json)
   })
-  .then(addEventListenersToPage())
 }
 
 function renderCards(cards, session_id) {
@@ -21,11 +32,13 @@ function renderCards(cards, session_id) {
 
 function slapCardToDom(card, session_id) {
   cardContainer.innerHTML += `
-  <h2>${card.question}</h2>
-  <form action="/sessions/${session_id}" method="patch">
-    ${randomizeAnswers(card)}
-    <input type="submit" value="Submit" data-session-id=${session_id}>
-  </form>
+  <div data-card-id="${card.id}" class="card">
+    <h2>${card.question}</h2>
+    <form action="/sessions/${session_id}" method="patch">
+      ${randomizeAnswers(card)}
+      <input type="submit" value="Submit" data-session-id=${session_id}>
+    </form>
+  </div>
   `
 }
 
@@ -60,6 +73,7 @@ function slapStatsOnTheDom(session) {
   statsContainer.innerHTML += `
     <h4 id="right">Right: ${session.right}</h4>
     <h4 id="wrong">Wrong: ${session.wrong}</h4>
+    <p id="total" hidden>${session.right+session.wrong}</p>
   `
 }
 
@@ -80,9 +94,12 @@ function addEventListenersToPage() {
         })
       }
 
-      fetch(`${MAIN_URL}${SESSIONS}/${document.querySelector('input[type="submit"]').dataset.sessionId}`, configPatch)
+      fetch(`${MAIN_URL}${SESSIONS}/${cardContainer.querySelector('input[type="submit"]').dataset.sessionId}`, configPatch)
       .then(resp => resp.json())
-      .then(json => updateStats(json))
+      .then(json => {
+        updateStats(json)
+        showDescription(e.target.parentNode)
+      })
     } else {
       let current_wrong_stats = statsContainer.querySelector('#wrong').innerText.split(' ')[1]
       current_wrong_stats++
@@ -97,9 +114,12 @@ function addEventListenersToPage() {
         })
       }
 
-      fetch(`${MAIN_URL}${SESSIONS}/${document.querySelector('input[type="submit"]').dataset.sessionId}`, configPatch)
+      fetch(`${MAIN_URL}${SESSIONS}/${cardContainer.querySelector('input[type="submit"]').dataset.sessionId}`, configPatch)
       .then(resp => resp.json())
-      .then(json => updateStats(json))
+      .then(json => {
+        updateStats(json)
+        showDescription(e.target.parentNode)
+      })
     }
   })
 
@@ -111,21 +131,32 @@ function addEventListenersToPage() {
     .then(resp => resp.json())
     .then(json => findOrCreateUser(json, user_input))
   })
+
+  // const singleCard = document.querySelectorAll('.card')
+  // singleCard.addEventListener('submit', e => {
+  //   console.log(e.target)
+  // })
 }
 
 function updateStats(session) {
     const right_stats = statsContainer.querySelector('#right')
     const wrong_stats = statsContainer.querySelector('#wrong')
+    const total_stats = statsContainer.querySelector('#total')
     right_stats.innerText = `Right: ${session.right}`
     wrong_stats.innerText = `Wrong: ${session.wrong}`
+    total_stats.innerText = `${session.right + session.wrong}`
+
 }
 
 function findOrCreateUser(users, user_input) {
   const result = users.find(user => {
     return user.name === user_input
   })
+
   if (result) {
     const user_id = result.id
+    createSessionForUser(user_id)
+  } else {
     const configPost = {
       method: "POST",
       headers: {
@@ -133,15 +164,41 @@ function findOrCreateUser(users, user_input) {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        "user_id": user_id,
-        "right": 0,
-        "wrong": 0
+        "name": user_input
       })
     }
-    fetch(`${MAIN_URL}${SESSIONS}`, configPost)
+    fetch(`${MAIN_URL}${USERS}`, configPost)
     .then(resp => resp.json())
-    .then(json => getCards(json))
-  } else {
-
+    .then(json => createSessionForUser(json.id))
   }
+}
+
+function createSessionForUser(user_id) {
+  const configPost = {
+    method: "POST",
+    headers: {
+      "Content-Type": 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      "user_id": user_id,
+      "right": 0,
+      "wrong": 0
+    })
+  }
+  fetch(`${MAIN_URL}${SESSIONS}`, configPost)
+  .then(resp => resp.json())
+  .then(json => getCards(json))
+}
+
+function showDescription(card_div) {
+  const card = cardsArray.find(card => card.id === parseInt(card_div.dataset.cardId))
+
+  card_div.innerHTML += `
+  <br>
+  <h4>Answer: ${card.answer}</h4>
+  <text>
+    ${card.description}
+  </text>
+  `
 }
