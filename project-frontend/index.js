@@ -1,3 +1,4 @@
+//variable declarations
 const MAIN_URL = "http://localhost:3000"
 const SESSIONS = "/sessions"
 const USERS = "/users"
@@ -7,41 +8,71 @@ const cardContainer = document.querySelector('#card-container')
 const statsContainer = document.querySelector('#stats-container')
 const login = document.querySelector('#login')
 const cardsArray = []
+let session_id = null
+let currentCards = []
+let card_index = 0
 
+
+//initial load of all cards into cardsArray
 function loadCards() {
   fetch(`${MAIN_URL}${CARDS}`)
   .then(resp => resp.json())
   .then(json => json.forEach(card => cardsArray.push(card)))
 }
 
+//initial call to add eventlisteners to page & loadcards
 addEventListenersToPage()
 loadCards()
 
+//function to retrieve cards for the session
 function getCards(json) {
   fetch(`${MAIN_URL}${SESSIONS}/${json.id}`)
   .then(resp => resp.json())
   .then(json => {
-    renderCards(json.cards, json.id)
+    session_id = json.id
+    currentCards = json.cards
+    renderCard(json.cards, json.id, card_index)
     slapStatsOnTheDom(json)
   })
 }
 
-function renderCards(cards, session_id) {
-  cards.forEach(card => slapCardToDom(card, session_id))
-}
-
-function slapCardToDom(card, session_id) {
-  cardContainer.innerHTML += `
+//function to render cards on DOM
+//load question function
+function renderCard(cards, session_id, card_index) {
+  const card = cards[card_index]
+  cardContainer.innerHTML = `
   <div data-card-id="${card.id}" class="card">
-    <h2>${card.question}</h2>
-    <form action="/sessions/${session_id}" method="patch">
-      ${randomizeAnswers(card)}
-      <input type="submit" value="Submit" data-session-id=${session_id}>
-    </form>
+    <div class = "flip-card-front">
+      <h2>${card.question}</h2>
+      <form action="/sessions/${session_id}" method="patch">
+        ${randomizeAnswers(card)}
+        <input type="submit" value="Submit" data-session-id=${session_id}>
+      </form>
+    </div>
+    <div class = "flip-card-back">
+      <h4>Answer: ${card.answer}</h4>
+      <text>
+        ${card.description}
+      </text>
+      <button id="next">Next</button>
+    </div>
   </div>
   `
+  if (card_index === currentCards.length -1){
+    const next_button = card_div.querySelector("#next")
+    next_button.innerText = "Finish"
+  }
 }
 
+//load next question function
+function loadNextQuestion(event){
+  card_index ++
+  renderCard(currentCards, session_id, card_index)
+}
+
+
+
+//function to randomize the order of answers
 function randomizeAnswers(card) {
   const answer = card.answer
   const choices = card.choices.map(choice => choice.option)
@@ -61,6 +92,7 @@ function randomizeAnswers(card) {
   return shuffleArray(answersArray).join('')
 }
 
+//callback function to randomizeAnswers
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -69,6 +101,7 @@ function shuffleArray(array) {
    return array
 }
 
+//function to render stats on DOM
 function slapStatsOnTheDom(session) {
   statsContainer.innerHTML += `
     <h4 id="right">Right: ${session.right}</h4>
@@ -77,7 +110,10 @@ function slapStatsOnTheDom(session) {
   `
 }
 
+
+//all eventlisteners for page
 function addEventListenersToPage() {
+  //right or wrong
   cardContainer.addEventListener('submit', e => {
     e.preventDefault()
     if (document.querySelector('input[name="selection"]:checked').className === 'answer') {
@@ -98,7 +134,8 @@ function addEventListenersToPage() {
       .then(resp => resp.json())
       .then(json => {
         updateStats(json)
-        showDescription(e.target.parentNode)
+        // showDescription(e.target.parentNode.parentNode)
+        flipCard(e)
       })
     } else {
       let current_wrong_stats = statsContainer.querySelector('#wrong').innerText.split(' ')[1]
@@ -118,11 +155,13 @@ function addEventListenersToPage() {
       .then(resp => resp.json())
       .then(json => {
         updateStats(json)
-        showDescription(e.target.parentNode)
+        flipCard(e)
+        // showDescription(e.target.parentNode.parentNode)
       })
     }
   })
 
+  //login
   login.addEventListener('submit', e => {
     e.preventDefault()
     const user_input = login.querySelector('input[type="text"]').value
@@ -130,14 +169,41 @@ function addEventListenersToPage() {
     fetch(`${MAIN_URL}${USERS}`)
     .then(resp => resp.json())
     .then(json => findOrCreateUser(json, user_input))
+    .then(scrollDown())
   })
 
-  // const singleCard = document.querySelectorAll('.card')
-  // singleCard.addEventListener('submit', e => {
-  //   console.log(e.target)
-  // })
+  //next button
+  document.addEventListener('click', e => {
+    if (e.target.id === "next" && e.target.innerText !== "Finish"){
+      loadNextQuestion(e)
+    }
+  })
+
+  //finish button
+  document.addEventListener('click', e => {
+    if (e.target.innerText === "Finish"){
+      const right_stats = statsContainer.querySelector('#right')
+      const wrong_stats = statsContainer.querySelector('#wrong')
+      const total_stats = statsContainer.querySelector('#total')
+      cardContainer.innerHTML =  `
+        <h2>Congratulations!</h2>
+        <p>You got ${right_stats.innerText.split(" ")[1]} questions right out of ${total_stats.innerText}</p>
+      `
+    }
+  })
 }
 
+function scrollDown(){
+  window.scrollBy(0, 1000)
+}
+
+function flipCard(e){
+  debugger
+  let el = e.target.parentElement.parentElement
+  el.style["transform"] = "rotateY(180deg)";
+}
+
+//function to update stats during quiz
 function updateStats(session) {
     const right_stats = statsContainer.querySelector('#right')
     const wrong_stats = statsContainer.querySelector('#wrong')
@@ -148,11 +214,11 @@ function updateStats(session) {
 
 }
 
+//function to find or create user upon login
 function findOrCreateUser(users, user_input) {
   const result = users.find(user => {
     return user.name === user_input
   })
-
   if (result) {
     const user_id = result.id
     createSessionForUser(user_id)
@@ -173,6 +239,7 @@ function findOrCreateUser(users, user_input) {
   }
 }
 
+//function to create new session
 function createSessionForUser(user_id) {
   const configPost = {
     method: "POST",
@@ -191,14 +258,21 @@ function createSessionForUser(user_id) {
   .then(json => getCards(json))
 }
 
-function showDescription(card_div) {
-  const card = cardsArray.find(card => card.id === parseInt(card_div.dataset.cardId))
-
-  card_div.innerHTML += `
-  <br>
-  <h4>Answer: ${card.answer}</h4>
-  <text>
-    ${card.description}
-  </text>
-  `
-}
+//function to show description for each question once answer submitted
+// function showDescription(card_div) {
+//   const card = cardsArray.find(card => card.id === parseInt(card_div.dataset.cardId))
+//   card_div.innerHTML += `
+//   <div class = "flip-card-back">
+//     <br>
+//     <h4>Answer: ${card.answer}</h4>
+//     <text>
+//       ${card.description}
+//     </text>
+//     <button id="next">Next</button>
+//   </div>
+//   `
+//   if (card_index === currentCards.length -1){
+//     const next_button = card_div.querySelector("#next")
+//     next_button.innerText = "Finish"
+//   }
+// }
