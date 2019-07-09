@@ -2,7 +2,8 @@
   display: flex;
   background-color: pink;
   text-align: center;
-  height: 1000px;
+  height: 825px;
+  width: 100%;
 }
 
 #login_form{
@@ -15,23 +16,54 @@
 
 .quiz-page {
   display: flex;
+  flex-direction: column;
   background-color: blue;
   text-align: center;
-  height: 1000px;
+  height: 787px;
+  width: 100%;
+  float: left;
+}
+
+#main-page {
+  display: grid;
+  grid-template-columns: 30% 70%;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+.selections {
+  width: 100%;
+  margin: 10%;
+  font-size: 40px;
+  height: 80px;
+  border-radius: 25px;
+}
+
+.selections:hover {
+  background-color: #1181f9;
+}
+
 #card-container{
   background-color: transparent;
-  width: 300px;
   height: 300px;
-  perspective: 1000px;
+  position: relative;
+  top: 20%;
+  left: 40%;
+  width: 500px;
+  /* perspective: 1000px; */
+  /* margin-left: 15%;
+  margin-top: 35%; */
 }
 
 .card {
+  display: flex;
   position: relative;
   width: 100%;
   height: 100%;
@@ -61,4 +93,10 @@ html {
   background-color: #2980b9;
   color: white;
   transform: rotateY(180deg);
+}
+
+#stats-container {
+  display: flex;
+  float: left;
+  width: 87%;
 }

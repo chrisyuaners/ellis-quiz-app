@@ -6,8 +6,11 @@ const CARDS = "/cards"
 const SESSIONCARDS = "/session_cards"
 const cardContainer = document.querySelector('#card-container')
 const statsContainer = document.querySelector('#stats-container')
+const quizPage = document.querySelector('.quiz-page')
 const login = document.querySelector('#login')
+const selections = document.querySelector('#selections')
 const cardsArray = []
+let current_user_id = 0
 let session_id = null
 let currentCards = []
 let card_index = 0
@@ -36,6 +39,14 @@ function getCards(json) {
   })
 }
 
+function renderSelection() {
+  cardContainer.innerHTML = `
+  <button id="10-questions" class="selections">10 Questions</button>
+  <button id="20-questions" class="selections">20 Questions</button>
+  <button id="all-questions" class="selections">All Questions</button>
+  `
+}
+
 //function to render cards on DOM
 //load question function
 function renderCard(cards, session_id, card_index) {
@@ -59,7 +70,7 @@ function renderCard(cards, session_id, card_index) {
   </div>
   `
   if (card_index === currentCards.length -1){
-    const next_button = card_div.querySelector("#next")
+    const next_button = cardContainer.querySelector("#next")
     next_button.innerText = "Finish"
   }
 }
@@ -103,7 +114,7 @@ function shuffleArray(array) {
 
 //function to render stats on DOM
 function slapStatsOnTheDom(session) {
-  statsContainer.innerHTML += `
+  statsContainer.innerHTML = `
     <h4 id="right">Right: ${session.right}</h4>
     <h4 id="wrong">Wrong: ${session.wrong}</h4>
     <p id="total" hidden>${session.right+session.wrong}</p>
@@ -170,6 +181,7 @@ function addEventListenersToPage() {
     .then(resp => resp.json())
     .then(json => findOrCreateUser(json, user_input))
     .then(scrollDown())
+    .then(renderSelection())
   })
 
   //next button
@@ -186,9 +198,22 @@ function addEventListenersToPage() {
       const wrong_stats = statsContainer.querySelector('#wrong')
       const total_stats = statsContainer.querySelector('#total')
       cardContainer.innerHTML =  `
-        <h2>Congratulations!</h2>
-        <p>You got ${right_stats.innerText.split(" ")[1]} questions right out of ${total_stats.innerText}</p>
+        <div class="results">
+          <h2>Congratulations!</h2>
+          <br>
+          <p>You got ${right_stats.innerText.split(" ")[1]} questions right out of ${total_stats.innerText}</p>
+          <button id="restart">Restart</button>
+        </div>
       `
+    }
+  })
+
+  quizPage.addEventListener('click', e => {
+    if (e.target.id === 'all-questions') {
+      createSessionForUser(current_user_id)
+    }
+    if (e.target.id === 'restart') {
+      renderSelection()
     }
   })
 }
@@ -198,7 +223,6 @@ function scrollDown(){
 }
 
 function flipCard(e){
-  debugger
   let el = e.target.parentElement.parentElement
   el.style["transform"] = "rotateY(180deg)";
 }
@@ -220,8 +244,8 @@ function findOrCreateUser(users, user_input) {
     return user.name === user_input
   })
   if (result) {
-    const user_id = result.id
-    createSessionForUser(user_id)
+    current_user_id = result.id
+    // createSessionForUser(user_id)
   } else {
     const configPost = {
       method: "POST",
@@ -235,7 +259,7 @@ function findOrCreateUser(users, user_input) {
     }
     fetch(`${MAIN_URL}${USERS}`, configPost)
     .then(resp => resp.json())
-    .then(json => createSessionForUser(json.id))
+    .then(json => current_user_id = json.id)
   }
 }
 
