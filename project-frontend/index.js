@@ -313,22 +313,3 @@ function createSessionForUser(user_id) {
   .then(resp => resp.json())
   .then(json => getCards(json))
 }
-
-//function to show description for each question once answer submitted
-// function showDescription(card_div) {
-//   const card = cardsArray.find(card => card.id === parseInt(card_div.dataset.cardId))
-//   card_div.innerHTML += `
-//   <div class = "flip-card-back">
-//     <br>
-//     <h4>Answer: ${card.answer}</h4>
-//     <text>
-//       ${card.description}
-//     </text>
-//     <button id="next">Next</button>
-//   </div>
-//   `
-//   if (card_index === currentCards.length -1){
-//     const next_button = card_div.querySelector("#next")
-//     next_button.innerText = "Finish"
-//   }
-// }

@@ -5,6 +5,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :answer
       t.text :description
       t.string :image_url
+      t.string :category
 
       t.timestamps
     end
