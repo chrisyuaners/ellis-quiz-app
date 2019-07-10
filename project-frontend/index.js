@@ -78,15 +78,16 @@ function getCards(json) {
 //function to render the quiz selection on quiz page
 function renderSelection() {
   cardContainer.innerHTML = `
-  <h4>Select Number of Questions:</h4>
-  <button id="10-questions" class="selections">10 Questions</button>
-  <button id="20-questions" class="selections">20 Questions</button>
-  <button id="all-questions" class="selections">All Questions</button>
-  <h3>OR</h3>
+
+  <h4 id = "select-title-top">Select Number of Questions:</h4>
+    <button id="10-questions" class="selections">10 Questions</button>
+    <button id="20-questions" class="selections">20 Questions</button>
+    <button id="all-questions" class="selections">All Questions</button>
   <h4>Select Questions by Category:</h4>
-  <button id="government" class="selections">Government</button>
-  <button id="history" class="selections">History</button>
-  <button id="geography" class="selections">Geography</button>
+    <button id="government" class="selections">Government</button>
+    <button id="history" class="selections">History</button>
+    <button id="geography" class="selections">Geography</button>
+  </div>
   <!-- <button id="test" class="selections">Test</button> -->
   `
 }
