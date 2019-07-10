@@ -111,9 +111,10 @@ header {
   flex-direction: column;
   background-color: blue;
   text-align: center;
-  height: 787px;
+  height: 800px;
   width: 100%;
-  float: left;
+  /* padding-top: 25%; */
+  /* float: left; */
 }
 
 #main-page {
@@ -125,12 +126,13 @@ header {
 
 .selections {
   width: 100%;
-  margin: 10%;
+  margin: 5% 0% 5% 15%;
   font-size: 20px;
   height: 40px;
   border-radius: 25px;
   display: flex;
   justify-content: center;
+
 }
 
 .selections:hover {
@@ -276,6 +278,20 @@ header {
   font-size: 30px;
   font-size: 20px;
 }
+
+#card-container h4 {
+  display: block;
+  margin-left: 150px;
+  font-size: 20px;
+
+}
+
+#select-title-top {
+  margin-top: 40%;
+}
+
+
+
 
 
 /* @media only screen and (max-width: 1000px) {
