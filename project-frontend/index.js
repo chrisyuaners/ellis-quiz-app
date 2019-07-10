@@ -20,6 +20,8 @@ let twenty_questions = false
 let government = false
 let history = false
 let geography = false
+let toggleStats = true
+let toggleTranslate = true
 // let test = false
 
 
@@ -92,7 +94,6 @@ function renderSelection() {
 //function to render cards on DOM
 //load question function
 function renderCard(cards, session_id, card_index) {
-  debugger
   const card = cards[card_index]
   cardContainer.innerHTML = `
   <div data-card-id="${card.id}" class="card">
@@ -293,10 +294,42 @@ function addEventListenersToPage() {
      renderSelection()
    }
  })
+
+ //nav-bar functionality
+ const nav_bar = document.querySelector('#navbar')
+
+ nav_bar.addEventListener('click', e => {
+   e.preventDefault()
+   if (e.target.innerText === 'STATS') {
+     if (toggleStats) {
+       openStats()
+       toggleStats = false
+     } else {
+       closeStats()
+       toggleStats = true
+     }
+   } else if (e.target.innerText === 'TRANSLATE') {
+     if (toggleTranslate) {
+
+     }
+   }
+ })
+}
+
+function openStats() {
+  document.querySelector('#stats-container').style.width = '320px'
+  document.querySelector('#main-page').style.marginLeft = '320px'
+}
+
+function closeStats() {
+  document.querySelector('#stats-container').style.width = '0'
+  document.querySelector('#main-page').style.marginLeft = '0'
 }
 
 function scrollDown(){
+  const nav_bar = document.querySelector('#navbar')
   window.scrollBy(0, 1000)
+  setTimeout(function(){ nav_bar.hidden = false }, 500)
 }
 
 function flipCard(e){
