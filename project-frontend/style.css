@@ -1,3 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:500&display=swap');
+
+li, a, .logout {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+}
+
+header {
+  position: fixed;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  background-color: pink;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+}
+
+.nav-links li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.nav-links li a {
+  transition: all 0.3s ease 0s;
+}
+
+.nav-links li a:hover {
+  color: #0088a9;
+}
+
+.logout {
+  padding: 9px 25px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.logout:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
 #login {
   display: flex;
   background-color: pink;
@@ -128,7 +182,7 @@ html, body {
   display: flex;
   flex-direction: column;
   float: left;
-  width: 87%;
+  width: 100%;
 }
 
 .card-images {

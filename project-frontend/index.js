@@ -161,7 +161,7 @@ function slapStatsOnTheDom(session) {
     <h4 id="right">Right: ${session.right}</h4>
     <h4 id="wrong">Wrong: ${session.wrong}</h4>
     <p id="total" hidden>${session.right+session.wrong}</p>
-    <canvas id="my-chart" width="400" height="400"></canvas>
+    <canvas id="my-chart" width="500" height="700"></canvas>
   `
 }
 
@@ -314,7 +314,7 @@ function updateStats(session) {
     wrong_stats.innerText = `Wrong: ${session.wrong}`
     total_stats.innerText = `${session.right + session.wrong}`
     const myBarChart = new Chart(ctx, {
-    type: 'horizontalBar',
+    type: 'bar',
     data: {
       labels: ['Right', 'Wrong'],
       datasets: [{
@@ -335,7 +335,9 @@ function updateStats(session) {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                  min: 0,
+                  max: 30,
+                  stepSize: 1
                 }
             }]
         }
