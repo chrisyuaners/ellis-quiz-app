@@ -14,6 +14,8 @@ let current_user_id = 0
 let session_id = null
 let currentCards = []
 let card_index = 0
+let ten_questions = false
+let twenty_questions = false
 
 
 //initial load of all cards into cardsArray
@@ -33,10 +35,20 @@ function getCards(json) {
   .then(resp => resp.json())
   .then(json => {
     session_id = json.id
-    currentCards = json.cards
-    renderCard(json.cards, json.id, card_index)
+    currentCards = shuffleArray(json.cards)
+    if (ten_questions){
+      currentCards = currentCards.slice(0,10)
+    }
+    if (twenty_questions){
+      currentCards = currentCards.slice(0,20)
+    }
+    renderCard(currentCards, json.id, card_index)
     slapStatsOnTheDom(json)
   })
+}
+
+function randomizeCards(cards){
+
 }
 
 function renderSelection() {
@@ -209,14 +221,24 @@ function addEventListenersToPage() {
     }
   })
 
-  quizPage.addEventListener(‘click’, e => {
-   if (e.target.id === ‘all-questions’) {
+  quizPage.addEventListener('click', e => {
+   if (e.target.id === 'all-questions') {
      createSessionForUser(current_user_id)
    }
-   if (e.target.id === ‘restart’) {
+   if (e.target.id === '10-questions'){
+     ten_questions = true
+     createSessionForUser(current_user_id)
+   }
+   if (e.target.id === '20-questions'){
+     twenty_questions = true
+     createSessionForUser(current_user_id)
+   }
+   if (e.target.id === 'restart') {
      card_index = 0
      session_id = null
      currentCards = []
+     ten_questions = false
+     twenty_questions = false
      renderSelection()
    }
  })
