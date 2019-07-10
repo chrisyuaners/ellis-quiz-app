@@ -118,6 +118,7 @@ function slapStatsOnTheDom(session) {
     <h4 id="right">Right: ${session.right}</h4>
     <h4 id="wrong">Wrong: ${session.wrong}</h4>
     <p id="total" hidden>${session.right+session.wrong}</p>
+    <canvas id="my-chart" width="400" height="400"></canvas>
   `
 }
 
@@ -208,17 +209,17 @@ function addEventListenersToPage() {
     }
   })
 
-  quizPage.addEventListener('click', e => {
-    if (e.target.id === 'all-questions') {
-      createSessionForUser(current_user_id)
-    }
-    if (e.target.id === 'restart') {
-      card_index = 0
-      session_id = null
-      currentCards = []
-      renderSelection()
-    }
-  })
+  quizPage.addEventListener(‘click’, e => {
+   if (e.target.id === ‘all-questions’) {
+     createSessionForUser(current_user_id)
+   }
+   if (e.target.id === ‘restart’) {
+     card_index = 0
+     session_id = null
+     currentCards = []
+     renderSelection()
+   }
+ })
 }
 
 function scrollDown(){
@@ -235,10 +236,38 @@ function updateStats(session) {
     const right_stats = statsContainer.querySelector('#right')
     const wrong_stats = statsContainer.querySelector('#wrong')
     const total_stats = statsContainer.querySelector('#total')
+    const ctx = statsContainer.querySelector('#my-chart')
     right_stats.innerText = `Right: ${session.right}`
     wrong_stats.innerText = `Wrong: ${session.wrong}`
     total_stats.innerText = `${session.right + session.wrong}`
-
+    const myBarChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+      labels: ['Right', 'Wrong'],
+      datasets: [{
+        label: 'Questions Answered',
+        data: [session.right, session.wrong],
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)'
+        ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 }
 
 //function to find or create user upon login
