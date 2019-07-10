@@ -2,17 +2,38 @@
   display: flex;
   background-color: pink;
   text-align: center;
+  flex-direction: column;
   height: 825px;
   width: 100%;
 }
 
 #login_form{
-  margin-top: 50px;
+  margin-top: -140px;
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
 }
+
+#login_form input{
+  font-size: 35px;
+  text-align: center;
+}
+
+#ellis-logo{
+  width: 50%;
+  /* width: 100%;
+  height: auto; */
+}
+
+/* .login_container{
+  width: 50%
+} */
+
+/* .noscroll {
+  position: fixed!important
+  overflow: hidden!important
+} */
 
 .quiz-page {
   display: flex;
@@ -31,6 +52,7 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
 }
 
 html, body {
@@ -41,9 +63,11 @@ html, body {
 .selections {
   width: 100%;
   margin: 10%;
-  font-size: 40px;
-  height: 80px;
+  font-size: 20px;
+  height: 40px;
   border-radius: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 .selections:hover {
@@ -54,8 +78,9 @@ html, body {
   background-color: transparent;
   height: 300px;
   position: relative;
-  top: 20%;
-  left: 40%;
+  top: 5%;
+  left: 27%;
+  bottom: 40%;
   width: 500px;
   /* perspective: 1000px; */
   /* margin-left: 15%;
@@ -65,12 +90,14 @@ html, body {
 .card {
   display: flex;
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 130%;
+  height: 170%;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  top: 60%;
+  border-radius: 25px;
 }
 
 /* .flipped {
@@ -85,14 +112,16 @@ html, body {
 }
 
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  background-color: #ccd1d8;
+  color: darkslategray;
+  border-radius: 25px;
 }
 
 .flip-card-back {
   background-color: #2980b9;
   color: white;
   transform: rotateY(180deg);
+  border-radius: 25px;
 }
 
 #stats-container {
@@ -100,4 +129,76 @@ html, body {
   flex-direction: column;
   float: left;
   width: 87%;
+}
+
+.card-images {
+  width: 30%;
+  margin: 4%;
+}
+
+.card h2 {
+  margin: 3%;
+}
+
+.card h4{
+  margin: 3%;
+}
+
+.flip-card-back h4 {
+  margin: 12%;
+  font-size: 25px;
+}
+
+.flip-card-back p {
+  margin: 5%;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.flip-card-back button {
+  margin: 5%;
+  height: 10%;
+  width: 30%;
+  font-size: 20px;
+}
+
+.card form {
+  margin: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 130%;
+  height: 170%;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  top: 60%;
+  background-color: rgb(133, 175, 195);
+}
+
+.results button {
+  width: 50%;
+  margin-left: 25%;
+  background-color: rgba(253, 161, 181, 1);
+  border-radius: 25px;
+  font-size: 20px;
+}
+
+.results h2 {
+  margin: 2%;
+  font-size: 34px;
+  margin-top: 16%;
+  font-color: rgba(70, 123, 149, 1);
+}
+
+.results p {
+  font-color: rgba(70, 123, 149, 1);
+  margin-bottom: 9%;
+  font-size: 30px;
+  font-size: 20px;
 }
