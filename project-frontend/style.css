@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:500&display=swap');
 
+/* html styling */
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+/* nav bar styling */
 li, a, .logout {
   font-family: 'Oswald', sans-serif;
   font-weight: 500;
@@ -16,12 +28,16 @@ header {
   align-items: center;
   padding: 20px 10%;
   background-color: pink;
+  height: 60px;
   z-index: 2;
   transition: height 350ms ease-in-out;
 }
 
 .logo {
   cursor: pointer;
+  width: 15%;
+    margin-top: 0%;
+    margin-left: -4%;
 }
 
 .nav-links {
@@ -86,10 +102,9 @@ header {
   width: 50%
 } */
 
-/* .noscroll {
-  position: fixed!important
-  overflow: hidden!important
-} */
+.noscroll {
+  overflow: hidden;
+}
 
 .quiz-page {
   display: flex;
@@ -107,15 +122,6 @@ header {
   transition: margin-left .5s;
 }
 
-html {
-  scroll-behavior: smooth;
-  width: 100%;
-}
-
-html, body {
-  margin: 0;
-  height: 100%;
-}
 
 .selections {
   width: 100%;
@@ -270,3 +276,16 @@ html, body {
   font-size: 30px;
   font-size: 20px;
 }
+
+
+/* @media only screen and (max-width: 1000px) {
+  #ellis-logo {
+    display: block;
+    width: 20%;
+  }
+  #login_form{
+    width: 30px;
+    font-size: 10px;
+    text-align: center;
+  }
+} */
