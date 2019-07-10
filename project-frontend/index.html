@@ -9,12 +9,14 @@
   </head>
   <body>
     <div id="login">
-      <div id = "login_form">
-        Enter Your Name:
-        <form  action="/users" method="post">
-          <input type="text" name="name">
-          <input type="submit" name="submit">
-        </form>
+      <div class="login_container">
+        <img id = "ellis-logo" src="images/Ellis_logo.png" alt="Logo">
+        <div id = "login_form">
+          <form  action="/users" method="post">
+            <input type="text" name="name" placeholder="Enter Your Name">
+            <input hidden type="submit" name="submit">
+          </form>
+        </div>
       </div>
     </div>
     <div id="main-page">

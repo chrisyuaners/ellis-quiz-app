@@ -9,6 +9,7 @@ const statsContainer = document.querySelector('#stats-container')
 const quizPage = document.querySelector('.quiz-page')
 const login = document.querySelector('#login')
 const selections = document.querySelector('#selections')
+const mainPage = document.querySelector("#main-page")
 const cardsArray = []
 let current_user_id = 0
 let session_id = null
@@ -16,6 +17,11 @@ let currentCards = []
 let card_index = 0
 let ten_questions = false
 let twenty_questions = false
+let government = false
+let history = false
+let geography = false
+// let test = false
+
 
 
 //initial load of all cards into cardsArray
@@ -28,6 +34,11 @@ function loadCards() {
 //initial call to add eventlisteners to page & loadcards
 addEventListenersToPage()
 loadCards()
+// lockScroll()
+
+// function lockScroll(){
+//   document.getElementsByTagName('body')[0].classList.add('noscroll')
+// }
 
 //function to retrieve cards for the session
 function getCards(json) {
@@ -42,6 +53,18 @@ function getCards(json) {
     if (twenty_questions){
       currentCards = currentCards.slice(0,20)
     }
+    if (government){
+      currentCards = currentCards.filter(card => card.category === 'Government')
+    }
+    if (history){
+      currentCards = currentCards.filter(card => card.category === 'History')
+    }
+    if (geography){
+      currentCards = currentCards.filter(card => card.category === 'Geography')
+    }
+    // if (test){
+    //   currentCards = [currentCards.find(card => card.id === 1)]
+    // }
     renderCard(currentCards, json.id, card_index)
     slapStatsOnTheDom(json)
   })
@@ -53,30 +76,40 @@ function randomizeCards(cards){
 
 function renderSelection() {
   cardContainer.innerHTML = `
+  <h4>Select Number of Questions:</h4>
   <button id="10-questions" class="selections">10 Questions</button>
   <button id="20-questions" class="selections">20 Questions</button>
   <button id="all-questions" class="selections">All Questions</button>
+  <h3>OR</h3>
+  <h4>Select Questions by Category:</h4>
+  <button id="government" class="selections">Government</button>
+  <button id="history" class="selections">History</button>
+  <button id="geography" class="selections">Geography</button>
+  <!-- <button id="test" class="selections">Test</button> -->
   `
 }
 
 //function to render cards on DOM
 //load question function
 function renderCard(cards, session_id, card_index) {
+  debugger
   const card = cards[card_index]
   cardContainer.innerHTML = `
   <div data-card-id="${card.id}" class="card">
     <div class = "flip-card-front">
+     <img class = "card-images" src= "${card.image_url}">
       <h2>${card.question}</h2>
-      <form action="/sessions/${session_id}" method="patch">
+      <form class = "answers-form" action="/sessions/${session_id}" method="patch">
         ${randomizeAnswers(card)}
         <input type="submit" value="Submit" data-session-id=${session_id}>
       </form>
+      <p>${card_index + 1} out of ${cards.length}</p>
     </div>
     <div class = "flip-card-back">
       <h4>Answer: ${card.answer}</h4>
-      <text>
+      <p>
         ${card.description}
-      </text>
+      </p>
       <button id="next">Next</button>
     </div>
   </div>
@@ -92,8 +125,6 @@ function loadNextQuestion(event){
   card_index ++
   renderCard(currentCards, session_id, card_index)
 }
-
-
 
 //function to randomize the order of answers
 function randomizeAnswers(card) {
@@ -212,7 +243,7 @@ function addEventListenersToPage() {
       const total_stats = statsContainer.querySelector('#total')
       cardContainer.innerHTML =  `
         <div class="results">
-          <h2>Congratulations!</h2>
+          <h2>Good Job!</h2>
           <br>
           <p>You got ${right_stats.innerText.split(" ")[1]} questions right out of ${total_stats.innerText}</p>
           <button id="restart">Restart</button>
@@ -233,12 +264,32 @@ function addEventListenersToPage() {
      twenty_questions = true
      createSessionForUser(current_user_id)
    }
+   if (e.target.id === 'government'){
+     government = true
+     createSessionForUser(current_user_id)
+   }
+   if (e.target.id === 'history'){
+     history = true
+     createSessionForUser(current_user_id)
+   }
+   if (e.target.id === 'geography'){
+     geography = true
+     createSessionForUser(current_user_id)
+   }
+   // if (e.target.id === 'test'){
+   //   test = true
+   //   createSessionForUser(current_user_id)
+   // }
    if (e.target.id === 'restart') {
      card_index = 0
      session_id = null
      currentCards = []
      ten_questions = false
      twenty_questions = false
+     government = false
+     history = false
+     geography = false
+     test = false
      renderSelection()
    }
  })
