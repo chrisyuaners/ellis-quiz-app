@@ -44,41 +44,40 @@ c12 = Card.create(question: "Which of the following is a U.S. territory?", answe
 
 c13 = Card.create(question: "Which of the following states shares the border with Canada?", answer: "Ohio", description: "Other states include: Maine, New Hampshire, Vermont, New York, Pennsylvania, Michigan, Minnesota, North Dakota, Montana, Idaho, Washington and Alaska.", category: "Geography")
 
-c13 = Card.create(question: "Which of the following states shares the border with Mexico?", answer: "Arizona", description: "Other states include: Texas, California, and New Mexico.", category: "Geography")
+c14 = Card.create(question: "Which of the following states shares the border with Mexico?", answer: "Arizona", description: "Other states include: Texas, California, and New Mexico.", category: "Geography")
 
-c14 = Card.create(question: "What is the capital of the United States?", answer: "Washington D.C.", description: "Washington, D.C., formally the District of Columbia and commonly referred to as Washington or D.C., is the capital of the United States.[4] Founded after the American Revolution as the seat of government of the newly independent country, Washington was named after George Washington, the first president of the United States and a Founding Father.", category: "Geography")
+c15 = Card.create(question: "What is the capital of the United States?", answer: "Washington D.C.", description: "Washington, D.C., formally the District of Columbia and commonly referred to as Washington or D.C., is the capital of the United States.[4] Founded after the American Revolution as the seat of government of the newly independent country, Washington was named after George Washington, the first president of the United States and a Founding Father.", category: "Geography")
 
-c15 = Card.create(question: "Under the Constitution, which of these powers does not belong to the federal government?", answer: "Ratify amendments to the Constitution", description: "The federal government has many powers, but it cannot amend the Constitution on its own; it can only send proposed amendments to the states to be ratified. Two-thirds votes of both the House and Senate are needed to get the ball rolling; then three-quarters of the states must ratify an amendment to make it part of the Constitution.", category: "Government")
+c16 = Card.create(question: "Under the Constitution, which of these powers does not belong to the federal government?", answer: "Ratify amendments to the Constitution", description: "The federal government has many powers, but it cannot amend the Constitution on its own; it can only send proposed amendments to the states to be ratified. Two-thirds votes of both the House and Senate are needed to get the ball rolling; then three-quarters of the states must ratify an amendment to make it part of the Constitution.", category: "Government")
 
-c16 = Card.create(question: "We elect a U.S. Senator for how many years?", answer: "Six years", description: "Senators serve six-year terms, though they can add up. Robert C. Byrd, a West Virginia Democrat and the nation’s longest-serving senator, was in office for 51 years, five months and 26 days, from 1959 until his death in 2010.", category: "Government")
+c17 = Card.create(question: "We elect a U.S. Senator for how many years?", answer: "Six years", description: "Senators serve six-year terms, though they can add up. Robert C. Byrd, a West Virginia Democrat and the nation’s longest-serving senator, was in office for 51 years, five months and 26 days, from 1959 until his death in 2010.", category: "Government")
 
-c17 = Card.create(question: "Who is the Chief Justice of the United States now?", answer: "John G Roberts Jr.", description: "The chief justice of the United States is the chief judge of the Supreme Court of the United States, and as such the highest-ranking judge of the federal judiciary.", category: "Government")
+c18 = Card.create(question: "Who is the Chief Justice of the United States now?", answer: "John G Roberts Jr.", description: "The chief justice of the United States is the chief judge of the Supreme Court of the United States, and as such the highest-ranking judge of the federal judiciary.", category: "Government")
 
-c18 = Card.create(question: "The Federalist Papers supported the passage of the U.S. Constitution. Which of these men was not one of the authors?", answer: "John Adams", description: "The Federalist Papers is a collection of 85 articles and essays written by Alexander Hamilton, James Madison, and John Jay under the pseudonym 'Publius' to promote the ratification (when a bill becomes a law) of the United States Constitution.", category: "History")
+c19 = Card.create(question: "The Federalist Papers supported the passage of the U.S. Constitution. Which of these men was not one of the authors?", answer: "John Adams", description: "The Federalist Papers is a collection of 85 articles and essays written by Alexander Hamilton, James Madison, and John Jay under the pseudonym 'Publius' to promote the ratification (when a bill becomes a law) of the United States Constitution.", category: "History")
 
-c19 = Card.create(question: "When was the Constitution written?", answer: "1787", description: "The Constitution of the United States is the supreme law of the United States of America. The Constitution, originally comprising seven articles, delineates the national frame of government.", category: "History")
+c20 = Card.create(question: "When was the Constitution written?", answer: "1787", description: "The Constitution of the United States is the supreme law of the United States of America. The Constitution, originally comprising seven articles, delineates the national frame of government.", category: "History")
 
-c20 = Card.create(question: "What is one important thing that Abraham Lincoln did?", answer: "Freed the slaves", description: "Abraham Lincoln was an American statesman, politician, and lawyer who served as the 16th president of the United States from 1861 until his assassination in April 1865. Lincoln led the nation through the American Civil War, its bloodiest war and its greatest moral, constitutional, and political crisis.", category: "History")
+c21 = Card.create(question: "What is one important thing that Abraham Lincoln did?", answer: "Freed the slaves", description: "Abraham Lincoln was an American statesman, politician, and lawyer who served as the 16th president of the United States from 1861 until his assassination in April 1865. Lincoln led the nation through the American Civil War, its bloodiest war and its greatest moral, constitutional, and political crisis.", category: "History")
 
-c21 = Card.create(question: "We elect a U.S. Representative for how many years?", answer: "2", description: "Elections for representatives are held in every even-numbered year, on Election Day the first Tuesday after the first Monday in November.", category: "Government")
+c22 = Card.create(question: "We elect a U.S. Representative for how many years?", answer: "2", description: "Elections for representatives are held in every even-numbered year, on Election Day the first Tuesday after the first Monday in November.", category: "Government")
 
-c22 = Card.create(question: "How many justices are on the Supreme Court?", answer: "9", description: "The Supreme Court of the United States is the highest ranking judicial body in the United States. Its membership, as set by the Judiciary Act of 1869, consists of the Chief Justice of the United States and eight associate justices.", category: "Government")
+c23 = Card.create(question: "How many justices are on the Supreme Court?", answer: "9", description: "The Supreme Court of the United States is the highest ranking judicial body in the United States. Its membership, as set by the Judiciary Act of 1869, consists of the Chief Justice of the United States and eight associate justices.", category: "Government")
 
-c23 = Card.create(question: "What did Susan B.Anthony do?", answer: "Fought for women's rights", description: "Susan B. Anthony was an American social reformer and women's rights activist who played a pivotal role in the women's suffrage movement. Born into a Quaker family committed to social equality, she collected anti-slavery petitions at the age of 17.", category: "History")
+c24 = Card.create(question: "What did Susan B.Anthony do?", answer: "Fought for women's rights", description: "Susan B. Anthony was an American social reformer and women's rights activist who played a pivotal role in the women's suffrage movement. Born into a Quaker family committed to social equality, she collected anti-slavery petitions at the age of 17.", category: "History")
 
-c24 = Card.create(question: "What is the supreme law of the land?", answer: "The Constitution", description: "The Constitution of the United States is the supreme law of the United States of America.", category: "Government")
+c25 = Card.create(question: "What is the supreme law of the land?", answer: "The Constitution", description: "The Constitution of the United States is the supreme law of the United States of America.", category: "Government")
 
-c25 = Card.create(question: "What does the President's Cabinet do?", answer: "Advises the President", description: "The Cabinet includes the Vice President and the heads of 15 executive departments.", category: "Government")
+c26 = Card.create(question: "What does the President's Cabinet do?", answer: "Advises the President", description: "The Cabinet includes the Vice President and the heads of 15 executive departments.", category: "Government")
 
-c26 = Card.create(question: "What is one right or freedom from the First Amendment?", answer: "Speech", description: "Other rights include: religion, assembly, press and to petition the government.", category: "Government")
+c27 = Card.create(question: "What is one right or freedom from the First Amendment?", answer: "Speech", description: "Other rights include: religion, assembly, press and to petition the government.", category: "Government")
 
-c27 = Card.create(question: "The idea of self-government is in the first three words of the Constitution. What are these words?", answer: "We the People", description: "The Preamble to the United States Constitution is a brief introductory statement of the Constitution's fundamental purposes and guiding principles.", category: "Government")
+c28 = Card.create(question: "The idea of self-government is in the first three words of the Constitution. What are these words?", answer: "We the People", description: "The Preamble to the United States Constitution is a brief introductory statement of the Constitution's fundamental purposes and guiding principles.", category: "Government")
 
-c28 = Card.create(question: "What are two Cabinet level positions?", answer: "Secretary of State and the Attorney General", description: "Other positions include: Secretary of Agriculture, Secretary of Commerce, Secretary of Defense, Secretary of Education, Secretary of Energy, Secretary of Health & Human Services, Secretary of Homeland Security, Secretary of Housing and Urban Development, Secretary of the Interior, Secretary of Labor, Secretary of Transportation, Secretary of the Treasury, Secretary of Veteran Affairs and the Vice President.", category: "Government")
+c29 = Card.create(question: "What are two Cabinet level positions?", answer: "Secretary of State and the Attorney General", description: "Other positions include: Secretary of Agriculture, Secretary of Commerce, Secretary of Defense, Secretary of Education, Secretary of Energy, Secretary of Health & Human Services, Secretary of Homeland Security, Secretary of Housing and Urban Development, Secretary of the Interior, Secretary of Labor, Secretary of Transportation, Secretary of the Treasury, Secretary of Veteran Affairs and the Vice President.", category: "Government")
 
-c29 = Card.create(question: "Who makes federal laws?", answer: "Congress", description: "Legislation passed by Congress, an Executive Order of the President, or a decision of federal courts pursuant to the Constitution are federal law. Through the system of checks and balances, it is the Supreme Court makes final decisions regarding federal laws regarding specific cases brought before them.", category: "Government")
+c30 = Card.create(question: "Who makes federal laws?", answer: "Congress", description: "Legislation passed by Congress, an Executive Order of the President, or a decision of federal courts pursuant to the Constitution are federal law. Through the system of checks and balances, it is the Supreme Court makes final decisions regarding federal laws regarding specific cases brought before them.", category: "Government")
 
-c30 = Card.create(question: "Under our Constitution, some powers belong to the states. What is one power of the states?", answer: "Provide schooling", description: "Other powers include: provide protection (police), provide safety (fire department), give a driver's license and approve zoning and land use.", category: "Government")
 
 
 ch1 = Choice.create(option: "Democrat")
@@ -152,7 +151,7 @@ ch69 = Choice.create(option: "Vice President and Secretary of Road Works")
 ch70 = Choice.create(option: "Secretary of the Treasury and Secretary of International Affairs")
 ch71 = Choice.create(option: "The President")
 ch72 = Choice.create(option: "The Senate")
-ch73 = Choice.create(option: "Create an Army")
+
 
 
 
@@ -201,65 +200,64 @@ CardChoice.create(card_id: c13.id, choice_id: ch30.id)
 CardChoice.create(card_id: c13.id, choice_id: ch31.id)
 CardChoice.create(card_id: c13.id, choice_id: ch32.id)
 
-CardChoice.create(card_id: c13.id, choice_id: ch33.id)
-CardChoice.create(card_id: c13.id, choice_id: ch34.id)
-CardChoice.create(card_id: c13.id, choice_id: ch35.id)
+CardChoice.create(card_id: c14.id, choice_id: ch33.id)
+CardChoice.create(card_id: c14.id, choice_id: ch34.id)
+CardChoice.create(card_id: c14.id, choice_id: ch35.id)
 
-CardChoice.create(card_id: c14.id, choice_id: ch36.id)
-CardChoice.create(card_id: c14.id, choice_id: ch37.id)
+CardChoice.create(card_id: c15.id, choice_id: ch36.id)
+CardChoice.create(card_id: c15.id, choice_id: ch37.id)
 
-CardChoice.create(card_id: c15.id, choice_id: ch38.id)
-CardChoice.create(card_id: c15.id, choice_id: ch39.id)
-CardChoice.create(card_id: c15.id, choice_id: ch40.id)
+CardChoice.create(card_id: c16.id, choice_id: ch38.id)
+CardChoice.create(card_id: c16.id, choice_id: ch39.id)
+CardChoice.create(card_id: c16.id, choice_id: ch40.id)
 
-CardChoice.create(card_id: c16.id, choice_id: ch41.id)
-CardChoice.create(card_id: c16.id, choice_id: ch42.id)
-CardChoice.create(card_id: c16.id, choice_id: ch43.id)
+CardChoice.create(card_id: c17.id, choice_id: ch41.id)
+CardChoice.create(card_id: c17.id, choice_id: ch42.id)
+CardChoice.create(card_id: c17.id, choice_id: ch43.id)
 
-CardChoice.create(card_id: c17.id, choice_id: ch44.id)
-CardChoice.create(card_id: c17.id, choice_id: ch45.id)
-CardChoice.create(card_id: c17.id, choice_id: ch46.id)
+CardChoice.create(card_id: c18.id, choice_id: ch44.id)
+CardChoice.create(card_id: c18.id, choice_id: ch45.id)
+CardChoice.create(card_id: c18.id, choice_id: ch46.id)
 
-CardChoice.create(card_id: c18.id, choice_id: ch47.id)
-CardChoice.create(card_id: c18.id, choice_id: ch48.id)
-CardChoice.create(card_id: c18.id, choice_id: ch49.id)
+CardChoice.create(card_id: c19.id, choice_id: ch47.id)
+CardChoice.create(card_id: c19.id, choice_id: ch48.id)
+CardChoice.create(card_id: c19.id, choice_id: ch49.id)
 
-CardChoice.create(card_id: c19.id, choice_id: ch50.id)
-CardChoice.create(card_id: c19.id, choice_id: ch51.id)
-CardChoice.create(card_id: c19.id, choice_id: ch52.id)
+CardChoice.create(card_id: c20.id, choice_id: ch50.id)
+CardChoice.create(card_id: c20.id, choice_id: ch51.id)
+CardChoice.create(card_id: c20.id, choice_id: ch52.id)
 
-CardChoice.create(card_id: c20.id, choice_id: ch53.id)
-CardChoice.create(card_id: c20.id, choice_id: ch54.id)
+CardChoice.create(card_id: c21.id, choice_id: ch53.id)
+CardChoice.create(card_id: c21.id, choice_id: ch54.id)
 
-CardChoice.create(card_id: c21.id, choice_id: ch4.id)
-CardChoice.create(card_id: c21.id, choice_id: ch56.id)
+CardChoice.create(card_id: c22.id, choice_id: ch4.id)
+CardChoice.create(card_id: c22.id, choice_id: ch56.id)
 
-CardChoice.create(card_id: c22.id, choice_id: ch57.id)
-CardChoice.create(card_id: c22.id, choice_id: ch58.id)
+CardChoice.create(card_id: c23.id, choice_id: ch57.id)
+CardChoice.create(card_id: c23.id, choice_id: ch58.id)
 
-CardChoice.create(card_id: c23.id, choice_id: ch59.id)
-CardChoice.create(card_id: c23.id, choice_id: ch60.id)
+CardChoice.create(card_id: c24.id, choice_id: ch59.id)
+CardChoice.create(card_id: c24.id, choice_id: ch60.id)
 
-CardChoice.create(card_id: c24.id, choice_id: ch61.id)
-CardChoice.create(card_id: c24.id, choice_id: ch62.id)
+CardChoice.create(card_id: c25.id, choice_id: ch61.id)
+CardChoice.create(card_id: c25.id, choice_id: ch62.id)
 
-CardChoice.create(card_id: c25.id, choice_id: ch63.id)
-CardChoice.create(card_id: c25.id, choice_id: ch64.id)
+CardChoice.create(card_id: c26.id, choice_id: ch63.id)
+CardChoice.create(card_id: c26.id, choice_id: ch64.id)
 
-CardChoice.create(card_id: c26.id, choice_id: ch65.id)
-CardChoice.create(card_id: c26.id, choice_id: ch66.id)
+CardChoice.create(card_id: c27.id, choice_id: ch65.id)
+CardChoice.create(card_id: c27.id, choice_id: ch66.id)
 
-CardChoice.create(card_id: c27.id, choice_id: ch67.id)
-CardChoice.create(card_id: c27.id, choice_id: ch68.id)
+CardChoice.create(card_id: c28.id, choice_id: ch67.id)
+CardChoice.create(card_id: c28.id, choice_id: ch68.id)
 
-CardChoice.create(card_id: c28.id, choice_id: ch69.id)
-CardChoice.create(card_id: c28.id, choice_id: ch70.id)
+CardChoice.create(card_id: c29.id, choice_id: ch69.id)
+CardChoice.create(card_id: c29.id, choice_id: ch70.id)
 
-CardChoice.create(card_id: c29.id, choice_id: ch71.id)
-CardChoice.create(card_id: c29.id, choice_id: ch72.id)
+CardChoice.create(card_id: c30.id, choice_id: ch71.id)
+CardChoice.create(card_id: c30.id, choice_id: ch72.id)
 
-CardChoice.create(card_id: c30.id, choice_id: ch38.id)
-CardChoice.create(card_id: c30.id, choice_id: ch73.id)
+
 
 # SessionCard.create(session_id: s1.id, card_id: c1.id)
 # SessionCard.create(session_id: s1.id, card_id: c2.id)
