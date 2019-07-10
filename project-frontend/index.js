@@ -22,8 +22,6 @@ let history = false
 let geography = false
 // let test = false
 
-
-
 //initial load of all cards into cardsArray
 function loadCards() {
   fetch(`${MAIN_URL}${CARDS}`)
@@ -34,11 +32,16 @@ function loadCards() {
 //initial call to add eventlisteners to page & loadcards
 addEventListenersToPage()
 loadCards()
-// lockScroll()
+lockScroll()
 
-// function lockScroll(){
-//   document.getElementsByTagName('body')[0].classList.add('noscroll')
-// }
+//initial call to temporarily lock scroll on login page
+function lockScroll(){
+  document.getElementsByTagName('body')[0].classList.add('noscroll')
+}
+
+function removeLockScroll(){
+  document.getElementsByTagName('body')[0].classList.remove('noscroll')
+}
 
 //function to retrieve cards for the session
 function getCards(json) {
@@ -70,10 +73,7 @@ function getCards(json) {
   })
 }
 
-function randomizeCards(cards){
-
-}
-
+//function to render the quiz selection on quiz page
 function renderSelection() {
   cardContainer.innerHTML = `
   <h4>Select Number of Questions:</h4>
@@ -90,9 +90,7 @@ function renderSelection() {
 }
 
 //function to render cards on DOM
-//load question function
 function renderCard(cards, session_id, card_index) {
-  debugger
   const card = cards[card_index]
   cardContainer.innerHTML = `
   <div data-card-id="${card.id}" class="card">
@@ -163,6 +161,7 @@ function slapStatsOnTheDom(session) {
     <p id="total" hidden>${session.right+session.wrong}</p>
     <canvas id="my-chart" width="500" height="700"></canvas>
   `
+  let card = document.querySelector('.flip-card-back')
 }
 
 
@@ -171,7 +170,9 @@ function addEventListenersToPage() {
   //right or wrong
   cardContainer.addEventListener('submit', e => {
     e.preventDefault()
+    let answer = false
     if (document.querySelector('input[name="selection"]:checked').className === 'answer') {
+      answer = true
       let current_right_stats = statsContainer.querySelector('#right').innerText.split(' ')[1]
       current_right_stats++
       const configPatch = {
@@ -188,7 +189,7 @@ function addEventListenersToPage() {
       fetch(`${MAIN_URL}${SESSIONS}/${cardContainer.querySelector('input[type="submit"]').dataset.sessionId}`, configPatch)
       .then(resp => resp.json())
       .then(json => {
-        updateStats(json)
+        updateStats(json, answer)
         // showDescription(e.target.parentNode.parentNode)
         flipCard(e)
       })
@@ -224,6 +225,7 @@ function addEventListenersToPage() {
     fetch(`${MAIN_URL}${USERS}`)
     .then(resp => resp.json())
     .then(json => findOrCreateUser(json, user_input))
+    .then(removeLockScroll())
     .then(scrollDown())
     .then(renderSelection())
   })
@@ -252,6 +254,7 @@ function addEventListenersToPage() {
     }
   })
 
+  //selection of quiz
   quizPage.addEventListener('click', e => {
    if (e.target.id === 'all-questions') {
      createSessionForUser(current_user_id)
@@ -295,17 +298,19 @@ function addEventListenersToPage() {
  })
 }
 
+//function to scroll down page automatically upon login
 function scrollDown(){
   window.scrollBy(0, 1000)
 }
 
+//function to flip quiz card
 function flipCard(e){
   let el = e.target.parentElement.parentElement
   el.style["transform"] = "rotateY(180deg)";
 }
 
 //function to update stats during quiz
-function updateStats(session) {
+function updateStats(session, answer) {
     const right_stats = statsContainer.querySelector('#right')
     const wrong_stats = statsContainer.querySelector('#wrong')
     const total_stats = statsContainer.querySelector('#total')
@@ -313,6 +318,16 @@ function updateStats(session) {
     right_stats.innerText = `Right: ${session.right}`
     wrong_stats.innerText = `Wrong: ${session.wrong}`
     total_stats.innerText = `${session.right + session.wrong}`
+
+    let card = document.querySelector(".flip-card-back")
+    if (answer){
+      card.children[0].innerText += "  ✔"
+      card.querySelector("h4").style.color = "#78ce78"
+    } else {
+      card.children[0].innerText += "  X"
+      card.querySelector("h4").style.color = "#f15f5f"
+
+    }
     const myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
