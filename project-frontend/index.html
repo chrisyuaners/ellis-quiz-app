@@ -13,8 +13,8 @@
         <img class="logo" src="images/Ellis_logo.png" alt="">
         <nav>
           <ul class="nav-links">
-            <li><a href="#">STATS</a></li>
-            <li><a href="#">TRANSLATE</a></li>
+            <li id="list-left"><a href="#">STATS</a></li>
+            <li id="list-right"><a href="#">ABOUT</a></li>
           </ul>
         </nav>
         <a href="#"><button class="logout" type="button" name="button">Logout</button></a>
@@ -33,6 +33,7 @@
     </div>
 
       <div id="stats-container">
+        <canvas id="my-chart" width="500" height="750"></canvas>
 
       </div>
     <div id="main-page">
@@ -283,7 +284,10 @@
 
       </div>
     </div>
-  </div>
+
+    <div id="about-container">
+      <p id="about-content" class="font">Hello</p>
+    </div>
 
   </body>
 </html>

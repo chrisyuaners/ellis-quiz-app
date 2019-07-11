@@ -4,13 +4,19 @@ const SESSIONS = "/sessions"
 const USERS = "/users"
 const CARDS = "/cards"
 const SESSIONCARDS = "/session_cards"
+const ANSWERS = "/answers"
 const cardContainer = document.querySelector('#card-container')
 const statsContainer = document.querySelector('#stats-container')
+Chart.defaults.global.defaultFontColor = 'white'
 const quizPage = document.querySelector('.quiz-page')
 const login = document.querySelector('#login')
 const selections = document.querySelector('#selections')
 const mainPage = document.querySelector("#main-page")
 const cardsArray = []
+let current_user_answers = []
+let govPercent = 0
+let hisPercent = 0
+let geoPercent = 0
 let current_user_id = 0
 let session_id = null
 let currentCards = []
@@ -21,7 +27,7 @@ let government = false
 let history = false
 let geography = false
 let toggleStats = true
-let toggleTranslate = true
+let toggleAbout = true
 // let test = false
 
 //initial load of all cards into cardsArray
@@ -102,9 +108,9 @@ function renderCard(cards, session_id, card_index) {
       <h2 class="font">${card.question}</h2>
       <form class = "answers-form" action="/sessions/${session_id}" method="patch">
         ${randomizeAnswers(card)}
-        <input type="submit" value="Submit" data-session-id=${session_id} class="submit-btn">
+        <input type="submit" value="Submit" data-session-id=${session_id} id="submit-btn" class="font">
       </form>
-      <p>${card_index + 1} out of ${cards.length}</p>
+      <p class="font" style="font-size: 13px; margin: -10px;">${card_index + 1} out of ${cards.length}</p>
     </div>
     <div class = "flip-card-back">
       <h4 id="answer-title">Answer: ${card.answer}</h4>
@@ -135,14 +141,18 @@ function randomizeAnswers(card) {
   const answersArray = choices.map(choice => {
     let i = 1
     const input = `
-    <input type="radio" value="${choice}" id="radio-${i}" name="selection" class="form-radio"><label for="radio-${i}" class="font">${choice}</label>
+    <div class="radio-btn">
+      <input type="radio" value="${choice}" id="radio-${i}" name="selection" class="form-radio"><label for="radio-${i}" class="font radio-size">${choice}</label>
+    </div>
     `
     i++
     return input
   })
 
   const answerInput = `
-  <input type="radio" class="answer form-radio" value="${answer}" name="selection" id="radio-answer"><label for="radio-answer" class="font">${answer}</label>
+  <div class="radio-btn">
+    <input type="radio" class="answer form-radio" value="${answer}" name="selection" id="radio-answer"><label for="radio-answer" class="font radio-size">${answer}</label>
+  </div>
   `
   answersArray.push(answerInput)
 
@@ -187,7 +197,8 @@ function addEventListenersToPage() {
           Accept: 'application/json'
         },
         body: JSON.stringify({
-          "right": current_right_stats
+          "right": current_right_stats,
+          "card_id": currentCards[card_index].id
         })
       }
 
@@ -208,7 +219,8 @@ function addEventListenersToPage() {
           Accept: 'application/json'
         },
         body: JSON.stringify({
-          "wrong": current_wrong_stats
+          "wrong": current_wrong_stats,
+          "card_id": currentCards[card_index].id
         })
       }
 
@@ -317,9 +329,12 @@ function addEventListenersToPage() {
      government = false
      history = false
      geography = false
-     statsContainer.innerHTML = ''
      i = 1
-     // test = false
+     current_user_answers = []
+     statsContainer.innerHTML = `
+     <canvas id="my-chart" width="500" height="750"></canvas>
+     `
+     getStats(current_user_id)
      renderSelection()
    }
  })
@@ -338,9 +353,13 @@ function addEventListenersToPage() {
        closeStats()
        toggleStats = true
      }
-   } else if (e.target.innerText === 'TRANSLATE') {
-     if (toggleTranslate) {
-
+   } else if (e.target.innerText === 'ABOUT') {
+     if (toggleAbout) {
+       openAbout()
+       toggleAbout = false
+     } else {
+       closeAbout()
+       toggleAbout = true
      }
    } else if (e.target.innerText === 'Logout') {
      const nav_bar = document.querySelector('#navbar')
@@ -355,8 +374,88 @@ function addEventListenersToPage() {
      government = false
      history = false
      geography = false
+     govPercent = 0
+     hisPercent = 0
+     geoPercent = 0
+     current_user_answers = []
    }
  })
+}
+
+function getStats(user_id) {
+  fetch(`${MAIN_URL}${USERS}/${user_id}`)
+  .then(resp => resp.json())
+  .then(json => categoryStats(json.answers))
+}
+
+function categoryStats(answers) {
+  const govArray = answers.filter(answer => answer.card.category === 'Government')
+  const hisArray = answers.filter(answer => answer.card.category === 'History')
+  const geoArray = answers.filter(answer => answer.card.category === 'Geography')
+
+  const govCorrect = govArray.filter(answer => answer.correct === true).length
+  const hisCorrect = hisArray.filter(answer => answer.correct === true).length
+  const geoCorrect = geoArray.filter(answer => answer.correct === true).length
+
+  govPercent = parseInt((govCorrect/govArray.length) * 100)
+  hisPercent = parseInt((hisCorrect/hisArray.length) * 100)
+  geoPercent = parseInt((geoCorrect/geoArray.length) * 100)
+
+  addCategoryStats()
+}
+
+function addCategoryStats() {
+  const chart = statsContainer.querySelector('#my-chart')
+
+  const categoryBarChart = new Chart(chart, {
+  type: 'bar',
+  data: {
+    labels: ['History', 'Government', 'Geography'],
+    datasets: [{
+      label: '% Answered Correct',
+      data: [hisPercent, govPercent, geoPercent],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.5)',
+        'rgba(255, 255, 255, 0.5)',
+        'rgba(54, 162, 235, 0.5)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 255, 255, 1)',
+        'rgba(54, 162, 235, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+            id: 'A',
+              ticks: {
+                min: 0,
+                max: 100,
+                stepSize: 20
+              }
+          }]
+      }
+    },
+    plugins: {
+      annotation: {
+        annotations: [{
+          type: 'line',
+          mode: 'horizontal',
+          scaleID: 'A',
+          value: 60,
+          borderColor: 'red',
+          borderWidth: 5,
+          label: {
+            enabled: false,
+            content: 'Passing Mark'
+          }
+        }]
+      }
+    }
+  })
 }
 
 function openStats() {
@@ -367,6 +466,16 @@ function openStats() {
 function closeStats() {
   document.querySelector('#stats-container').style.width = '0'
   document.querySelector('#main-page').style.marginLeft = '0'
+}
+
+function openAbout() {
+  document.querySelector('#about-container').style.width = '320px'
+  document.querySelector('#main-page').style.marginRight = '320px'
+}
+
+function closeAbout() {
+  document.querySelector('#about-container').style.width = '0'
+  document.querySelector('#main-page').style.marginRight = '0'
 }
 
 //function to scroll down page automatically upon login
@@ -415,11 +524,11 @@ function updateStats(session, answer) {
         label: 'Questions Answered',
         data: [session.right, session.wrong],
         backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 99, 132, 0.2)'
+          'rgba(123, 239, 178, 0.5)',
+          'rgba(255, 99, 132, 0.5)'
         ],
         borderColor: [
-          'rgba(54, 162, 235, 1)',
+          'rgba(123, 239, 178, 1)',
           'rgba(255, 99, 132, 1)'
         ],
         borderWidth: 1
@@ -436,7 +545,7 @@ function updateStats(session, answer) {
             }]
         }
     }
-});
+  })
 }
 
 //function to find or create user upon login
@@ -446,6 +555,7 @@ function findOrCreateUser(users, user_input) {
   })
   if (result) {
     current_user_id = result.id
+    getStats(result.id)
     // createSessionForUser(user_id)
   } else {
     const configPost = {
@@ -460,7 +570,10 @@ function findOrCreateUser(users, user_input) {
     }
     fetch(`${MAIN_URL}${USERS}`, configPost)
     .then(resp => resp.json())
-    .then(json => current_user_id = json.id)
+    .then(json => {
+      current_user_id = json.id
+      getStats(json.id)
+    })
   }
 }
 
