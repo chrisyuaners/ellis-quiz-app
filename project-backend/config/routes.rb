@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :answers
   resources :session_cards
   resources :card_choices
   resources :choices

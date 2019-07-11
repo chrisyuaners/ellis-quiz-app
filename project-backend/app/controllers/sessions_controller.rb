@@ -17,8 +17,14 @@ class SessionsController < ApplicationController
   end
 
   def update
+    if params.key?("right")
+      boolean = true
+    else
+      boolean = false
+    end
     session = Session.find(params[:id])
     session.update(session_params)
+    new_answer = Answer.create(user_id: session.user_id, card_id: params[:card_id], correct: boolean)
     render json: session
   end
 
