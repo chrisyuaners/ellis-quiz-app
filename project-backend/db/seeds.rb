@@ -64,7 +64,7 @@ c22 = Card.create(question: "We elect a U.S. Representative for how many years?"
 
 c23 = Card.create(question: "How many justices are on the Supreme Court?", answer: "9", description: "The Supreme Court of the United States is the highest ranking judicial body in the United States. Its membership, as set by the Judiciary Act of 1869, consists of the Chief Justice of the United States and eight associate justices.", category: "Government", image_url: "images/law2.png")
 
-c24 = Card.create(question: "What did Susan B.Anthony do?", answer: "Fought for women's rights", description: "Susan B. Anthony was an American social reformer and women's rights activist who played a pivotal role in the women's suffrage movement. Born into a Quaker family committed to social equality, she collected anti-slavery petitions at the age of 17.", category: "History", image_url: "images/susanbanthony.png")
+c24 = Card.create(question: "What did Susan B. Anthony do?", answer: "Fought for women's rights", description: "Susan B. Anthony was an American social reformer and women's rights activist who played a pivotal role in the women's suffrage movement. Born into a Quaker family committed to social equality, she collected anti-slavery petitions at the age of 17.", category: "History", image_url: "images/susanbanthony.png")
 
 c25 = Card.create(question: "What is the supreme law of the land?", answer: "The Constitution", description: "The Constitution of the United States is the supreme law of the United States of America.", category: "Government")
 

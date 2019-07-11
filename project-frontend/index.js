@@ -244,10 +244,6 @@ function addEventListenersToPage() {
     if (e.target.id === "next" && e.target.innerText !== "Finish"){
       loadNextQuestion(e)
     }
-  })
-
-  //finish button
-  document.addEventListener('click', e => {
     if (e.target.innerText === "Finish"){
       const right_stats = statsContainer.querySelector('#right')
       const wrong_stats = statsContainer.querySelector('#wrong')
@@ -262,7 +258,26 @@ function addEventListenersToPage() {
         </div>
       `
     }
+    if (e.target.innerText === "Learn More"){
+      removeLockScroll();
+      document.querySelector("#en").style.display = 'flex';
+      document.querySelector("#es").style.display = 'flex';
+      document.querySelector("#ch").style.display = 'flex';
+      scrollDown_info();
+    }
+    if (e.target.innerText === "ES"){
+      window.location = 'index.html#Spanish-section'
+    }
+    if (e.target.innerText === "EN"){
+      window.location = 'index.html#English-section'
+    }
+    if (e.target.innerText === "CH"){
+      window.location = 'index.html#Chinese-section'
+
+    }
   })
+
+
 
   //selection of quiz
   quizPage.addEventListener('click', e => {
@@ -308,6 +323,7 @@ function addEventListenersToPage() {
      renderSelection()
    }
  })
+
 
  //nav-bar functionality
  const nav_bar = document.querySelector('#navbar')
@@ -357,6 +373,12 @@ function closeStats() {
 function scrollDown(){
   const nav_bar = document.querySelector('#navbar')
   window.scrollBy(0, 1000)
+  setTimeout(function(){ nav_bar.hidden = false }, 500)
+}
+
+function scrollDown_info(){
+  const nav_bar = document.querySelector('#navbar')
+  window.scrollBy(0, 700)
   setTimeout(function(){ nav_bar.hidden = false }, 500)
 }
 
