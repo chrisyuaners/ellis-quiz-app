@@ -108,9 +108,9 @@ function renderCard(cards, session_id, card_index) {
       <h2 class="font">${card.question}</h2>
       <form class = "answers-form" action="/sessions/${session_id}" method="patch">
         ${randomizeAnswers(card)}
-        <input type="submit" value="Submit" data-session-id=${session_id} class="submit-btn">
+        <input type="submit" value="Submit" data-session-id=${session_id} id="submit-btn" class="font">
       </form>
-      <p>${card_index + 1} out of ${cards.length}</p>
+      <p class="font" style="font-size: 13px; margin: -10px;">${card_index + 1} out of ${cards.length}</p>
     </div>
     <div class = "flip-card-back">
       <h4 id="answer-title">Answer: ${card.answer}</h4>
