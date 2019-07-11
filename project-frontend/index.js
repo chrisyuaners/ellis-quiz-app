@@ -107,7 +107,7 @@ function renderCard(cards, session_id, card_index) {
       <p>${card_index + 1} out of ${cards.length}</p>
     </div>
     <div class = "flip-card-back">
-      <h4>Answer: ${card.answer}</h4>
+      <h4 id="answer-title">Answer: ${card.answer}</h4>
       <p>
         ${card.description}
       </p>
