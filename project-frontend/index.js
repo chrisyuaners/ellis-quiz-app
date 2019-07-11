@@ -79,11 +79,11 @@ function getCards(json) {
 function renderSelection() {
   cardContainer.innerHTML = `
 
-  <h4 id = "select-title-top">Select Number of Questions:</h4>
+  <h4 id = "select-title-top" class="font">Select Number of Questions:</h4>
     <button id="10-questions" class="selections">10 Questions</button>
     <button id="20-questions" class="selections">20 Questions</button>
     <button id="all-questions" class="selections">All Questions</button>
-  <h4>Select Questions by Category:</h4>
+  <h4 class="font">Select Questions by Category:</h4>
     <button id="government" class="selections">Government</button>
     <button id="history" class="selections">History</button>
     <button id="geography" class="selections">Geography</button>
@@ -99,10 +99,10 @@ function renderCard(cards, session_id, card_index) {
   <div data-card-id="${card.id}" class="card">
     <div class = "flip-card-front">
      <img class = "card-images" src= "${card.image_url}">
-      <h2>${card.question}</h2>
+      <h2 class="font">${card.question}</h2>
       <form class = "answers-form" action="/sessions/${session_id}" method="patch">
         ${randomizeAnswers(card)}
-        <input type="submit" value="Submit" data-session-id=${session_id}>
+        <input type="submit" value="Submit" data-session-id=${session_id} class="submit-btn">
       </form>
       <p>${card_index + 1} out of ${cards.length}</p>
     </div>
@@ -133,14 +133,16 @@ function randomizeAnswers(card) {
   const choices = card.choices.map(choice => choice.option)
 
   const answersArray = choices.map(choice => {
+    let i = 1
     const input = `
-    <input type="radio" value="${choice}" name="selection">${choice}<br>
+    <input type="radio" value="${choice}" id="radio-${i}" name="selection" class="form-radio"><label for="radio-${i}" class="font">${choice}</label>
     `
+    i++
     return input
   })
 
   const answerInput = `
-  <input type="radio" class="answer" value="${answer}" name="selection">${answer}<br>
+  <input type="radio" class="answer form-radio" value="${answer}" name="selection" id="radio-answer"><label for="radio-answer" class="font">${answer}</label>
   `
   answersArray.push(answerInput)
 
@@ -159,10 +161,10 @@ function shuffleArray(array) {
 //function to render stats on DOM
 function slapStatsOnTheDom(session) {
   statsContainer.innerHTML = `
-    <h4 id="right">Right: ${session.right}</h4>
-    <h4 id="wrong">Wrong: ${session.wrong}</h4>
+    <h4 id="right" class="font">Right: ${session.right}</h4>
+    <h4 id="wrong" class="font">Wrong: ${session.wrong}</h4>
     <p id="total" hidden>${session.right+session.wrong}</p>
-    <canvas id="my-chart" width="500" height="700"></canvas>
+    <canvas id="my-chart" width="500" height="750"></canvas>
   `
   let card = document.querySelector('.flip-card-back')
 }
@@ -174,7 +176,7 @@ function addEventListenersToPage() {
   cardContainer.addEventListener('submit', e => {
     e.preventDefault()
     let answer = false
-    if (document.querySelector('input[name="selection"]:checked').className === 'answer') {
+    if (document.querySelector('input[name="selection"]:checked').classList.contains('answer')) {
       answer = true
       let current_right_stats = statsContainer.querySelector('#right').innerText.split(' ')[1]
       current_right_stats++
@@ -224,13 +226,17 @@ function addEventListenersToPage() {
   login.addEventListener('submit', e => {
     e.preventDefault()
     const user_input = login.querySelector('input[type="text"]').value
+    const name_input = login_form.querySelector('#name-input')
 
     fetch(`${MAIN_URL}${USERS}`)
     .then(resp => resp.json())
     .then(json => findOrCreateUser(json, user_input))
     .then(removeLockScroll())
     .then(scrollDown())
+    .then(lockScroll())
     .then(renderSelection())
+
+    name_input.reset()
   })
 
   //next button
@@ -247,8 +253,9 @@ function addEventListenersToPage() {
       const wrong_stats = statsContainer.querySelector('#wrong')
       const total_stats = statsContainer.querySelector('#total')
       cardContainer.innerHTML =  `
-        <div class="results">
+        <div class="results font">
           <h2>Good Job!</h2>
+          <h3>${parseInt((right_stats.innerText.split(" ")[1]/ total_stats.innerText)*100)}%</h3>
           <br>
           <p>You got ${right_stats.innerText.split(" ")[1]} questions right out of ${total_stats.innerText}</p>
           <button id="restart">Restart</button>
@@ -295,7 +302,9 @@ function addEventListenersToPage() {
      government = false
      history = false
      geography = false
-     test = false
+     statsContainer.innerHTML = ''
+     i = 1
+     // test = false
      renderSelection()
    }
  })
@@ -317,6 +326,19 @@ function addEventListenersToPage() {
      if (toggleTranslate) {
 
      }
+   } else if (e.target.innerText === 'Logout') {
+     const nav_bar = document.querySelector('#navbar')
+     window.scrollBy(0, -1000)
+     nav_bar.hidden = true
+     statsContainer.hidden = true
+     card_index = 0
+     session_id = null
+     currentCards = []
+     ten_questions = false
+     twenty_questions = false
+     government = false
+     history = false
+     geography = false
    }
  })
 }
