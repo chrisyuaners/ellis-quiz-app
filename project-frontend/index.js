@@ -7,6 +7,8 @@ const SESSIONCARDS = "/session_cards"
 const ANSWERS = "/answers"
 const cardContainer = document.querySelector('#card-container')
 const statsContainer = document.querySelector('#stats-container')
+const aboutContainer = document.querySelector('#about-container')
+
 Chart.defaults.global.defaultFontColor = 'white'
 const quizPage = document.querySelector('.quiz-page')
 const login = document.querySelector('#login')
@@ -171,8 +173,10 @@ function shuffleArray(array) {
 //function to render stats on DOM
 function slapStatsOnTheDom(session) {
   statsContainer.innerHTML = `
+    <div class="right-wrong">
     <h4 id="right" class="font">Right: ${session.right}</h4>
     <h4 id="wrong" class="font">Wrong: ${session.wrong}</h4>
+    </div>
     <p id="total" hidden>${session.right+session.wrong}</p>
     <canvas id="my-chart" width="500" height="750"></canvas>
   `
@@ -510,10 +514,10 @@ function updateStats(session, answer) {
     let card = document.querySelector(".flip-card-back")
     if (answer){
       card.children[0].innerText += "  ✔"
-      card.querySelector("h4").style.color = "#78ce78"
+      card.querySelector("h4").style.color = "#0f7d0f"
     } else {
       card.children[0].innerText += "  X"
-      card.querySelector("h4").style.color = "#f15f5f"
+      card.querySelector("h4").style.color = "#ec1e1e"
 
     }
     const myBarChart = new Chart(ctx, {

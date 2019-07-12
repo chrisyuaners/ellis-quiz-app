@@ -96,8 +96,10 @@ header {
 }
 
 #login_form input{
-  font-size: 35px;
+  font-size: 28px;
   text-align: center;
+  line-height: 1.5;
+  border-radius: 10px;
 }
 
 #ellis-logo{
@@ -192,7 +194,7 @@ header {
 }
 
 .flip-card-back {
-  background-color: #2980b9;
+  background-color: #6e95af;
   color: white;
   transform: rotateY(180deg);
   border-radius: 25px;
@@ -230,20 +232,43 @@ header {
   overflow-x: hidden;
   padding-top: 110px;
   transition: 0.5s;
+  background-color: #374785;
 }
 
-#about-content {
+
+/* #about-content {
   padding-left: 10px;
+} */
+
+.about-content p {
+  line-height: 1.6;
+  font-style: italic;
+  margin: 35px;
+  display: flex;
+  font-family: sans-serif;
+  color: white;
+}
+
+#signature {
+  float: right;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 35px;
+  display: flex;
+  font-family: sans-serif;
+  color: white;
 }
 
 .card-images {
   top: 5px;
   width: 30%;
+  margin-top: 10px;
   /* margin: 4%; */
 }
 
 .card h2 {
   margin: 1px;
+  font-size: 22px;
 }
 
 .card h4{
@@ -258,7 +283,7 @@ header {
 .flip-card-back p {
   margin: 5%;
   font-size: 20px;
-  font-style: italic;
+  font-family: sans-serif;
 }
 
 .flip-card-back button {
@@ -323,6 +348,8 @@ header {
 
 #answer-title {
   padding-right: 10%;
+  font-family: 'Oswald',sans-serif;
+  font-size: 25px;
 }
 
 .font {
@@ -543,12 +570,11 @@ background: #8d8da5;
   height: 1000px;
 }
 
-
-@media all and (max-width:30em) {
- input.submit-btn {
-  display:block;
-  margin:0.4em auto;
- }
+.right-wrong {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
 
 #submit-btn {
   background-color: #fcfcd9; /* Green */
@@ -565,5 +591,36 @@ background: #8d8da5;
   cursor: pointer;
   border-radius: 25px;
 }
+
+#submit-btn:hover {
+  opacity: 0.5;
+}
+
+/* #next {
+  background-color: #fcfcd9;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+#next:hover{
+  opacity: 0.5;
+} */
+
+@media all and (max-width:30em) {
+ input.submit-btn {
+  display:block;
+  margin:0.4em auto;
+ }
+
 
 /* submit button end (card form) */
