@@ -543,15 +543,8 @@ background: #8d8da5;
   height: 1000px;
 }
 
-
-@media all and (max-width:30em) {
- input.submit-btn {
-  display:block;
-  margin:0.4em auto;
- }
-
 #submit-btn {
-  background-color: #fcfcd9; /* Green */
+  background-color: #fcfcd9;
   border: none;
   color: black;
   padding: 16px 32px;
@@ -560,10 +553,17 @@ background: #8d8da5;
   display: inline-block;
   font-size: 16px;
   margin-top: 10px;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
   border-radius: 25px;
 }
+
+@media all and (max-width:30em) {
+ input.submit-btn {
+  display:block;
+  margin:0.4em auto;
+ }
+
 
 /* submit button end (card form) */
