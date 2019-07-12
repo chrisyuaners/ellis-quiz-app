@@ -108,7 +108,7 @@ function renderCard(cards, session_id, card_index) {
     <div class = "flip-card-front">
      <img class = "card-images" src= "${card.image_url}">
       <h2 class="font">${card.question}</h2>
-      <form class = "answers-form" action="/sessions/${session_id}" method="patch">
+      <form class = "answers-form" id="question-form" action="/sessions/${session_id}" method="patch">
         ${randomizeAnswers(card)}
         <input type="submit" value="Submit" data-session-id=${session_id} id="submit-btn" class="font">
       </form>
@@ -126,6 +126,13 @@ function renderCard(cards, session_id, card_index) {
   if (card_index === currentCards.length -1){
     const next_button = cardContainer.querySelector("#next")
     next_button.innerText = "Finish"
+  }
+
+  document.getElementById("question-form").onkeypress = function(e) {
+    const key = e.charCode || e.keyCode || 0
+    if (key == 13) {
+      e.preventDefault()
+    }
   }
 }
 

@@ -570,6 +570,7 @@ background: #8d8da5;
   height: 1000px;
 }
 
+
 .right-wrong {
   display: flex;
   justify-content: center;
@@ -577,7 +578,7 @@ background: #8d8da5;
 }
 
 #submit-btn {
-  background-color: #fcfcd9; /* Green */
+  background-color: #fcfcd9;
   border: none;
   color: black;
   padding: 16px 32px;
@@ -586,11 +587,12 @@ background: #8d8da5;
   display: inline-block;
   font-size: 16px;
   margin-top: 10px;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
   border-radius: 25px;
 }
+
 
 #submit-btn:hover {
   opacity: 0.5;
@@ -615,6 +617,7 @@ background: #8d8da5;
 #next:hover{
   opacity: 0.5;
 } */
+
 
 @media all and (max-width:30em) {
  input.submit-btn {
