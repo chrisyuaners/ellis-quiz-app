@@ -90,7 +90,7 @@ nav {
   background-color: pink;
   text-align: center;
   flex-direction: column;
-  height: 825px;
+  height: 100%;
   width: 100%;
 }
 
