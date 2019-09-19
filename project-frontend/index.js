@@ -104,7 +104,7 @@ function renderSelection() {
 function renderCard(cards, session_id, card_index) {
   const card = cards[card_index]
   cardContainer.innerHTML = `
-  <div data-card-id="${card.id}" class="card">
+  <div data-card-id="${card.id}" class="card question-card-container">
     <div class = "flip-card-front">
      <img class = "card-images" src= "${card.image_url}">
       <h2 class="font">${card.question}</h2>

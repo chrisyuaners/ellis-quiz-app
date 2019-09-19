@@ -96,6 +96,7 @@ header {
 }
 
 #login_form input{
+  outline: none;
   font-size: 28px;
   text-align: center;
   line-height: 1.5;
@@ -121,10 +122,10 @@ header {
   flex-direction: column;
   background-color: #A8D0E6;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   height: 800px;
   width: 100%;
-  /* padding-top: 25%; */
-  /* float: left; */
 }
 
 #main-page {
@@ -136,7 +137,7 @@ header {
 
 .selections {
   width: 100%;
-  margin: 5% 0% 5% 15%;
+  /* margin: 5% 0% 5% 15%; */
   font-size: 20px;
   height: 40px;
   border-radius: 25px;
@@ -152,26 +153,30 @@ header {
 #card-container{
   background-color: transparent;
   height: 300px;
-  position: relative;
-  top: 5%;
-  left: 27%;
-  bottom: 40%;
-  width: 500px;
-  /* perspective: 1000px; */
-  /* margin-left: 15%;
-  margin-top: 35%; */
+  width: 58%;
+}
+
+.question-card-container{
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28%;
+  width: 58%;
+  /* height: 28%;
+  width: 49%; */
 }
 
 .card {
   display: flex;
-  position: relative;
+  /* position: relative; */
   width: 130%;
   height: 170%;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  top: 60%;
+  /* top: 60%; */
   border-radius: 25px;
 }
 
@@ -337,13 +342,13 @@ header {
 
 #card-container h4 {
   display: block;
-  margin-left: 150px;
+  /* margin-left: 150px; */
   font-size: 20px;
 
 }
 
 #select-title-top {
-  margin-top: 40%;
+  /* margin-top: 40%; */
 }
 
 #answer-title {
