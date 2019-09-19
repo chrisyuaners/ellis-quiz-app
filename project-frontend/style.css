@@ -21,11 +21,11 @@ header li, a, .logout {
 }
 
 #list-left {
-  margin: 0px 300px 0px 0px;
+
 }
 
 #list-right {
-  margin: 0px 0px 0px 300px;
+
 }
 
 header {
@@ -48,8 +48,15 @@ header {
     margin-left: -4%;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .nav-links {
-  list-style: none;
+  display: flex;
+  padding: 0% 3%;
 }
 
 .nav-links li {
