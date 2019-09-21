@@ -105,10 +105,10 @@ function renderCard(cards, session_id, card_index) {
   const card = cards[card_index]
   cardContainer.innerHTML = `
   <div data-card-id="${card.id}" class="card">
-    <div class = "flip-card-front">
-     <img class = "card-images" src= "${card.image_url}">
+    <div class="flip-card-front">
+     <img class="card-images" src="./${card.image_url}">
       <h2 class="font">${card.question}</h2>
-      <form class = "answers-form" id="question-form" action="/sessions/${session_id}" method="patch">
+      <form class="answers-form" id="question-form" action="/sessions/${session_id}" method="patch">
         ${randomizeAnswers(card)}
         <input type="submit" value="Submit" data-session-id=${session_id} id="submit-btn" class="font">
       </form>
