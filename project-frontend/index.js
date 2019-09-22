@@ -44,6 +44,16 @@ addEventListenersToPage()
 loadCards()
 lockScroll()
 
+function collapseNav(){
+  const bar = document.getElementById("myTopNav");
+    if (bar.className === "topnav") {
+      bar.className += " responsive";
+    } else {
+      bar.className = "topnav";
+    }
+    console.log(bar.className)
+}
+
 //initial call to temporarily lock scroll on login page
 function lockScroll(){
   document.getElementsByTagName('body')[0].classList.add('noscroll')
