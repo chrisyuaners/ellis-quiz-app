@@ -381,8 +381,11 @@ function addEventListenersToPage() {
      }
    } else if (e.target.innerText === 'Logout') {
      const nav_bar = document.querySelector('#navbar')
-     window.scrollBy(0, -1000)
+     window.scrollTo(0, 0)
      nav_bar.hidden = true
+     login.style.display = 'flex'
+     mainPage.hidden = true
+
      statsContainer.hidden = true
      card_index = 0
      session_id = null
@@ -504,8 +507,8 @@ function scrollDown(){
   // window.scrollBy(0, 2000)
 
   setTimeout(function(){ nav_bar.hidden = false }, 500)
-  setTimeout(function(){ login_page.style.display = "none" }, 500)
-  setTimeout(function(){ main_page.hidden = false }, 500)
+  setTimeout(function(){ login.style.display = "none" }, 500)
+  setTimeout(function(){ mainPage.hidden = false }, 500)
   setTimeout(function(){ window.scrollBy(0, 1000) }, 550)
 
 }
