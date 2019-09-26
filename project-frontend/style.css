@@ -302,7 +302,6 @@ nav {
 }
 
 .card form {
-  margin: 3%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -361,6 +360,7 @@ nav {
   font-family: 'Oswald', sans-serif;
   font-weight: 200;
   font-size: 30px;
+  padding-top: 2%;
 }
 
 /* @media only screen and (max-width: 1000px) {
